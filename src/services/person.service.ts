@@ -13,7 +13,7 @@ class PersonService {
     }
 
     addPerson(person: Person) {
-        return axios.post(`${api}/persons/`, { person });
+        return axios.post(`${api}/persons/`, person);
     }
 
     deletePerson(person: Person) {

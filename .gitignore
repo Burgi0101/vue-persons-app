@@ -29,3 +29,6 @@ dist
 
 # Docs
 gh-pages
+
+# DB File
+db.json

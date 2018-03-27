@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app">
         <person-dashboard></person-dashboard>
     </div>
 </template>
@@ -18,5 +18,9 @@ export default class AppComponent extends Vue {}
 </script>
 
 <style scoped>
-
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
