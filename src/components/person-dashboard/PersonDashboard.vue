@@ -2,13 +2,34 @@
     <div class="dashboard-container">
       <div v-if="!loading">
         <h1>Person Dashboard</h1>
-          <PersonItem 
-            v-for="person of persons" 
-            :key="person.id"
-            :person="person">
-          </PersonItem>
+          <div id="persons">
+            <div 
+              v-for="person of persons" 
+              :key="person.id"
+            >
+            {{ person.id}} - {{ person.name}}
+            <button
+              @click="onEdit(person)">
+              Edit
+            </button>
 
-          <button @click="onAdd({ id: persons.length, name: 'what'})">Add Person</button>
+            <button
+              @click="onDelete(person)">
+              Delete
+            </button>
+            
+            </div>
+          </div>
+          <input 
+            type="text"
+            placeholder="Person Name"
+            v-model="name">
+          <button 
+            :disabled="!isValid"
+            @click="onAdd({ id: persons.length, name: name})"
+          >
+            Add Person
+          </button>
         </div>
       <loading-spinner v-if="loading"></loading-spinner>
     </div>
@@ -32,6 +53,7 @@ import { Person } from "../../models/person.interface";
 export default class PersonDashboard extends Vue {
   loading: boolean = false;
   persons: Person[] = [];
+  name: string = "";
 
   created() {
     this.getPersons();
@@ -50,11 +72,25 @@ export default class PersonDashboard extends Vue {
     this.loading = true;
 
     personService.addPerson(person).then(response => {
-      if (response.status === 201) {
-        this.persons.push(response.data);
-        this.loading = false;
-      }
+      this.persons.push(response.data);
+      this.name = "";
+      this.loading = false;
     });
+  }
+
+  onEdit(person: Person) {}
+
+  onDelete(person: Person) {
+    this.loading = true;
+
+    personService.deletePerson(person).then(() => {
+      this.persons = this.persons.filter(p => p !== person);
+      this.loading = false;
+    });
+  }
+
+  get isValid(): boolean {
+    return this.name !== "";
   }
 }
 </script>

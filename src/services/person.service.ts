@@ -17,7 +17,7 @@ class PersonService {
     }
 
     deletePerson(person: Person) {
-        return axios.delete(`${api}/person/${person.id}`);
+        return axios.delete(`${api}/persons/${person.id}`);
     }
 
     updatePerson(person: Person) {
