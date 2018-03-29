@@ -21,11 +21,21 @@ export const actions: ActionTree<RootState, RootState> = {
             .catch(error => commit(GET_PERSONS_FAIL, error));
     },
 
+    
     addPerson({ commit }: ActionContext<RootState, RootState>, person: Person): void {
+        
+        /* Once the ADD_PERSON_INIT "muation" is dispatched 
+           the person will be added to the state but is not
+           yet persisted with the backend.
+        */
         commit(ADD_PERSON_INIT, person);
 
         personService
             .addPerson(person)
+            /* Once the person was added in the backend it is returning
+               the persited person and i dispatch a ADD_PERSON_SUCCESS "muation"
+               with this persisted person.  
+            */
             .then(res => commit(ADD_PERSON_SUCCESS, res.data))
             .catch(error => commit(ADD_PERSON_FAIL, error));
     },

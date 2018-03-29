@@ -45,6 +45,10 @@ export const mutations: MutationTree<RootState> = {
     },
 
     [ADD_PERSON_SUCCESS](state: RootState, payload: Person): void {
+        /* Here I'm checking for the person that is not 
+           persisted to the backend yet (id:null) and exchange
+           it with the response from the server.
+        */
         state.persons = state.persons.filter(p => p.id !== null);
         state.persons = [...state.persons, payload];
         state.loading = false;
