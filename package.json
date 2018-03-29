@@ -1,7 +1,7 @@
 {
   "name": "persons-app",
   "version": "1.0.0",
-  "description": "A vue.js spa with webpack and typescript",
+  "description": "A vue.js spa with vuex, typescript and webpack",
   "scripts": {
     "build:dev": "rimraf dist && webpack --mode development",
     "build:prod": "rimraf dist && webpack --mode production",

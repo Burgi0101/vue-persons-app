@@ -1,5 +1,5 @@
 import { MutationTree } from 'vuex';
-import { RootState } from '.';
+import { RootState } from './';
 import { Person } from '../models/person.interface';
 
 export const GET_PERSONS_INIT = '[Persons] Get Persons';

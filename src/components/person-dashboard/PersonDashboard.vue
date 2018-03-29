@@ -3,22 +3,12 @@
       <div v-if="!loading">
         <h1>Person Dashboard</h1>
           <div id="persons">
-            <div 
-              v-for="person of persons" 
+            <person-item
+              v-for="person of persons"
+              :person="person"
               :key="person.id"
             >
-            {{ person.id}} - {{ person.name}}
-            <button
-              @click="onEdit(person)">
-              Edit
-            </button>
-
-            <button
-              @click="onDelete(person)">
-              Delete
-            </button>
-
-            </div>
+            </person-item>
           </div>
           <input 
             type="text"
@@ -36,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { Prop, Vue } from "vue-property-decorator";
-import { State, Action, Getter } from "vuex-class";
+import Vue from "vue";
+import { Action, Getter } from "vuex-class";
 import Component from "vue-class-component";
 
 import PersonItem from "../person-item/PersonItem.vue";
@@ -55,8 +45,6 @@ import { Person } from "../../models/person.interface";
 export default class PersonDashboard extends Vue {
   @Action("getPersons") getPersons: any;
   @Action("addPerson") addPerson: any;
-  @Action("deletePerson") deletePerson: any;
-  @Action("editPerson") editPerson: any;
 
   @Getter("getPersons") persons: Person[];
   @Getter("getLoading") loading: boolean;
@@ -69,18 +57,7 @@ export default class PersonDashboard extends Vue {
 
   onAdd(person: Person) {
     this.addPerson(person);
-
     this.name = "";
-  }
-
-  onDelete(person: Person) {
-    this.deletePerson(person);
-  }
-
-  onEdit(person: Person) {
-    person.name = "Edited_" + person.name;
-
-    this.editPerson(person);
   }
 
   get isValid(): boolean {
