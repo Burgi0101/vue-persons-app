@@ -39,16 +39,23 @@ export default class PersonItem extends Vue {
   name: string = this.person.name;
   editing: boolean = false;
 
-  toggleEdit(event: Person) {
+  toggleEdit(person: Person) {
     if (this.editing) {
-      event.name = this.name;
-      this.editPerson(event);
+
+      if (this.hasChanged) {
+        person.name = this.name;
+        this.editPerson(person);
+      }
     }
     this.editing = !this.editing;
   }
 
   onDelete(person: Person) {
     this.deletePerson(person);
+  }
+
+  get hasChanged(): boolean {
+    return this.name !== this.person.name;
   }
 }
 </script>
