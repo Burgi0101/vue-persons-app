@@ -36,7 +36,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Prop, Vue } from "vue-property-decorator";
+import { State, Action, Getter } from "vuex-class";
+import Component from "vue-class-component";
 
 import PersonItem from "../person-item/PersonItem.vue";
 import LoadingSpinner from "../loading-spinner/LoadingSpinner.vue";
@@ -51,52 +53,34 @@ import { Person } from "../../models/person.interface";
   }
 })
 export default class PersonDashboard extends Vue {
-  loading: boolean = false;
-  persons: Person[] = [];
+  @Action("getPersons") getPersons: any;
+  @Action("addPerson") addPerson: any;
+  @Action("deletePerson") deletePerson: any;
+  @Action("editPerson") editPerson: any;
+
+  @Getter("getPersons") persons: Person[];
+  @Getter("getLoading") loading: boolean;
+
   name: string = "";
 
   created() {
     this.getPersons();
   }
 
-  getPersons() {
-    this.loading = true;
-
-    personService.getPersons().then(response => {
-      this.persons = response.data;
-      this.loading = false;
-    });
-  }
-
   onAdd(person: Person) {
-    this.loading = true;
+    this.addPerson(person);
 
-    personService.addPerson(person).then(response => {
-      this.persons.push(response.data);
-      this.name = "";
-      this.loading = false;
-    });
-  }
-
-  onEdit(person: Person) {
-    this.loading = true;
-
-    person.name = "Edited_" + person.name;
-
-    personService.updatePerson(person).then(() => {
-      let index = this.persons.findIndex(p => person.id === p.id);
-      this.persons.splice(index, 1, person);
-      this.loading = false;
-    });
+    this.name = "";
   }
 
   onDelete(person: Person) {
-    this.loading = true;
+    this.deletePerson(person);
+  }
 
-    personService.deletePerson(person).then(() => {
-      this.persons = this.persons.filter(p => p !== person);
-      this.loading = false;
-    });
+  onEdit(person: Person) {
+    person.name = "Edited_" + person.name;
+
+    this.editPerson(person);
   }
 
   get isValid(): boolean {
