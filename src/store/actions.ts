@@ -22,7 +22,7 @@ export const actions: ActionTree<RootState, RootState> = {
     },
 
     addPerson({ commit }: ActionContext<RootState, RootState>, person: Person): void {
-        commit(ADD_PERSON_INIT);
+        commit(ADD_PERSON_INIT, person);
 
         personService
             .addPerson(person)

@@ -39,11 +39,13 @@ export const mutations: MutationTree<RootState> = {
 
     // ADD PERSON MUTATIONS
 
-    [ADD_PERSON_INIT](state: RootState): void {
+    [ADD_PERSON_INIT](state: RootState, payload: Person): void {
+        state.persons = [...state.persons, payload];
         state.loading = true;
     },
 
     [ADD_PERSON_SUCCESS](state: RootState, payload: Person): void {
+        state.persons = state.persons.filter(p => p.id !== null);
         state.persons = [...state.persons, payload];
         state.loading = false;
     },
