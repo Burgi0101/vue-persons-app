@@ -2,7 +2,10 @@
     <div class="dashboard-container">
       <div v-if="!loading">
         <h1>Person Dashboard</h1>
-          <div id="persons">
+          <div id="persons-panel">
+            <div v-if="!persons.length">
+              There are no persons yet, please add one.
+            </div>
             <person-item
               v-for="person of persons"
               :person="person"
@@ -10,25 +13,27 @@
             >
             </person-item>
           </div>
-          <input 
-            type="text"
-            placeholder="Person Name"
-            v-model="name">
-          <button 
-            :disabled="!isValid"
-            @click="onAdd({ id: persons.length, name: name})"
-          >
-            Add Person
-          </button>
+          <div id="add-person-panel">
+            <input 
+              type="text"
+              placeholder="Person Name"
+              v-model="name"
+            >
+            <button 
+              :disabled="!isValid"
+              @click="onAdd({ id: null, name: name})"
+            >
+              Add Person
+            </button>
+          </div>
         </div>
       <loading-spinner v-if="loading"></loading-spinner>
     </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 import { Action, Getter } from "vuex-class";
-import Component from "vue-class-component";
 
 import PersonItem from "../person-item/PersonItem.vue";
 import LoadingSpinner from "../loading-spinner/LoadingSpinner.vue";

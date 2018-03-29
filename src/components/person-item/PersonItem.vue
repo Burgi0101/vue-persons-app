@@ -24,9 +24,8 @@
 </template>
 
 <script lang="ts">
-import { Prop, Vue } from "vue-property-decorator";
-import { Action, Getter } from "vuex-class";
-import Component from "vue-class-component";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { Action } from "vuex-class";
 
 import { Person } from "../../models/person.interface";
 
