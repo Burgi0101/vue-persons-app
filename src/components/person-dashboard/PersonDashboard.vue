@@ -17,7 +17,7 @@
               @click="onDelete(person)">
               Delete
             </button>
-            
+
             </div>
           </div>
           <input 
@@ -78,7 +78,17 @@ export default class PersonDashboard extends Vue {
     });
   }
 
-  onEdit(person: Person) {}
+  onEdit(person: Person) {
+    this.loading = true;
+
+    person.name = "Edited_" + person.name;
+
+    personService.updatePerson(person).then(() => {
+      let index = this.persons.findIndex(p => person.id === p.id);
+      this.persons.splice(index, 1, person);
+      this.loading = false;
+    });
+  }
 
   onDelete(person: Person) {
     this.loading = true;

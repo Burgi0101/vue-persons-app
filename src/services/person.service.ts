@@ -21,7 +21,7 @@ class PersonService {
     }
 
     updatePerson(person: Person) {
-        return axios.put(`${api}/person/${person.id}`, { person });
+        return axios.patch(`${api}/persons/${person.id}`, person);
     }
 }
 
