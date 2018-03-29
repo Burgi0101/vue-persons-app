@@ -1,6 +1,6 @@
 import { GetterTree } from 'vuex';
 
-import { RootState } from '.';
+import { RootState } from './';
 import { Person } from '../models/person.interface';
 
 // GetterTree<[current state], [root state]>

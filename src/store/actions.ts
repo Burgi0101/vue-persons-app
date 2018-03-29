@@ -1,5 +1,4 @@
 import { ActionTree, ActionContext } from 'vuex';
-import axios from 'axios';
 
 import { RootState } from './';
 import { personService } from '../services/person.service';
@@ -12,6 +11,7 @@ import {
 } from './mutations';
 
 export const actions: ActionTree<RootState, RootState> = {
+
     getPersons({ commit }: ActionContext<RootState, RootState>): void {
         commit(GET_PERSONS_INIT);
 
@@ -21,9 +21,8 @@ export const actions: ActionTree<RootState, RootState> = {
             .catch(error => commit(GET_PERSONS_FAIL, error));
     },
 
-    
     addPerson({ commit }: ActionContext<RootState, RootState>, person: Person): void {
-        
+
         /* Once the ADD_PERSON_INIT "muation" is dispatched 
            the person will be added to the state but is not
            yet persisted with the backend.
@@ -57,6 +56,4 @@ export const actions: ActionTree<RootState, RootState> = {
             .then(res => commit(DELETE_PERSON_SUCCESS, person))
             .catch(error => commit(DELETE_PERSON_FAIL, error));
     }
-
-
 };

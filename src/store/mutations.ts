@@ -1,4 +1,5 @@
 import { MutationTree } from 'vuex';
+
 import { RootState } from './';
 import { Person } from '../models/person.interface';
 

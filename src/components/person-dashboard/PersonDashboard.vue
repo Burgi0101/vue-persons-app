@@ -35,6 +35,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { Action, Getter } from "vuex-class";
 
+// Child Components
 import PersonItem from "../person-item/PersonItem.vue";
 import LoadingSpinner from "../loading-spinner/LoadingSpinner.vue";
 
@@ -42,6 +43,7 @@ import { personService } from "../../services/person.service";
 import { Person } from "../../models/person.interface";
 
 @Component({
+  // Registering Child Components
   components: {
     PersonItem,
     LoadingSpinner
