@@ -36,6 +36,9 @@ yarn start
 # OR
 npm start
 ```
+The webpack-dev server is using json-server as a fake backend. The db.json
+is used like a database where you can read and write to. For more information
+you can check the link on the bottom of the page.
 
 Visit `localhost:8080` to see the app running.
 
@@ -58,4 +61,5 @@ further about to dive deeper or understand in more detail what they are:
 * [vue.js](https://vuejs.org/)
 * [vuex](https://vuex.vuejs.org/en/)
 * [npm](https://www.npmjs.com/)
-* [Webpack](https://webpack.js.org/)
+* [webpack](https://webpack.js.org/)
+* [json-server](https://github.com/typicode/json-server)
