@@ -56,6 +56,10 @@ export const mutations: MutationTree<RootState> = {
     },
 
     [ADD_PERSON_FAIL](state: RootState, payload: string): void {
+        /* If adding of the person fails I'm removing the entry with 
+           the ID of null.
+        */
+        state.persons = state.persons.filter(p => p.id !== null);
         state.errors = [...state.errors, payload];
         state.loading = false;
     },
