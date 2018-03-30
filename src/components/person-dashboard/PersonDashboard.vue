@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard-container">
+      <h2>Person Dashboard</h2>
       <div v-if="!loading">
-        <h2>Person Dashboard</h2>
         <div class="persons-panel">
           <div v-if="!persons.length">
             There are no persons yet, please add one.
