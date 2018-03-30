@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({})
 export default class LoadingSpinner extends Vue {
-  @Prop() size: string = "40px";
+  size: string = "40px";
 
   get styles() {
     return {
