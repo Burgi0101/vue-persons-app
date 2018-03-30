@@ -6,7 +6,6 @@
       <div v-if="!loading">
 
         <div class="persons-panel">
-          
           <div class="row" v-if="!persons.length">
             There are no persons yet, please add one.
           </div>
@@ -23,11 +22,14 @@
           <input
             class="input"
             type="text"
+            tabindex="1"
             placeholder="Person Name"
             v-model="name"
           >
+
           <button
             class="btn"
+            tabindex="2"
             :class="{ 'btn-disabled' : !isValid}"
             :disabled="!isValid"
             @click="onAdd({ id: null, name: name})">
