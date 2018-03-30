@@ -1,22 +1,26 @@
 <template>
-    <div>
+    <div class="person-item-container">
+
         <div v-if="!editing">
-            {{ person.id}} - {{ person.name}}
+          {{ person.id}} - {{ person.name}}
         </div>
 
         <div v-if="editing">
-            <input 
-                type="text"
-                v-model="name"
+            <input
+              class="input"
+              type="text"
+              v-model="name"
             >
         </div>
 
         <button
+            class="btn"
             @click="toggleEdit(person)">
             {{ editing ? 'Done' : 'Edit' }}
         </button>
 
         <button
+            class=" btn btn-danger"
             @click="onDelete(person)">
             Delete
         </button>
@@ -40,7 +44,6 @@ export default class PersonItem extends Vue {
 
   toggleEdit(person: Person) {
     if (this.editing) {
-
       if (this.hasChanged) {
         person.name = this.name;
         this.editPerson(person);
@@ -59,6 +62,12 @@ export default class PersonItem extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss"scoped>
+@import "../../assets/styles.scss";
 
+.person-item-container {  
+  border: 1px solid black;
+  margin: 2px;
+  padding: 5px;
+}
 </style>

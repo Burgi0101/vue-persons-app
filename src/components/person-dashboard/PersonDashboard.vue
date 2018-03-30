@@ -1,32 +1,35 @@
 <template>
     <div class="dashboard-container">
       <div v-if="!loading">
-        <h1>Person Dashboard</h1>
-          <div id="persons-panel">
-            <div v-if="!persons.length">
-              There are no persons yet, please add one.
-            </div>
-            <person-item
-              v-for="person of persons"
-              :person="person"
-              :key="person.id"
-            >
-            </person-item>
+        <h2>Person Dashboard</h2>
+        <div class="persons-panel">
+          <div v-if="!persons.length">
+            There are no persons yet, please add one.
           </div>
-          <div id="add-person-panel">
-            <input 
-              type="text"
-              placeholder="Person Name"
-              v-model="name"
-            >
-            <button 
-              :disabled="!isValid"
-              @click="onAdd({ id: null, name: name})"
-            >
-              Add Person
-            </button>
-          </div>
+          <person-item
+            v-for="person of persons"
+            :person="person"
+            :key="person.id"
+          >
+          </person-item>
         </div>
+        <div class="add-person-panel">
+          <input
+            class="input"
+            type="text"
+            placeholder="Person Name"
+            v-model="name"
+          >
+          <button
+            class="btn"
+            :class="{ 'btn-disabled' : !isValid}"
+            :disabled="!isValid"
+            @click="onAdd({ id: null, name: name})"
+          >
+            Add Person
+          </button>
+        </div>
+      </div>
       <loading-spinner v-if="loading"></loading-spinner>
     </div>
 </template>
@@ -74,10 +77,22 @@ export default class PersonDashboard extends Vue {
 </script>
 
 <style scoped>
+@import "../../assets/styles.scss";
+
+h2 {
+  text-align: center;
+}
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.add-person-panel {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 5px;
 }
 </style>
