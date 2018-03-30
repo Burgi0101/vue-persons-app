@@ -80,7 +80,7 @@ export default class PersonDashboard extends Vue {
   }
 
   get isValid(): boolean {
-    return this.name !== "";
+    return this.name.trim() !== "";
   }
 }
 </script>
