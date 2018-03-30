@@ -1,11 +1,16 @@
 <template>
     <div class="dashboard-container">
+
       <h2>Person Dashboard</h2>
+
       <div v-if="!loading">
+
         <div class="persons-panel">
-          <div v-if="!persons.length">
+          
+          <div class="row" v-if="!persons.length">
             There are no persons yet, please add one.
           </div>
+
           <person-item
             v-for="person of persons"
             :person="person"
@@ -13,7 +18,8 @@
           >
           </person-item>
         </div>
-        <div class="add-person-panel">
+
+        <div class="row">
           <input
             class="input"
             type="text"
@@ -24,13 +30,14 @@
             class="btn"
             :class="{ 'btn-disabled' : !isValid}"
             :disabled="!isValid"
-            @click="onAdd({ id: null, name: name})"
-          >
+            @click="onAdd({ id: null, name: name})">
             Add Person
           </button>
         </div>
       </div>
+
       <loading-spinner v-if="loading"></loading-spinner>
+
     </div>
 </template>
 
@@ -88,11 +95,5 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.add-person-panel {
-  border: 1px solid black;
-  margin: 2px;
-  padding: 5px;
 }
 </style>

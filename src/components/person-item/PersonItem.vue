@@ -1,5 +1,5 @@
 <template>
-    <div class="person-item-container">
+    <div class="row">
 
         <div v-if="!editing">
           {{ person.id}} - {{ person.name}}
@@ -64,10 +64,4 @@ export default class PersonItem extends Vue {
 
 <style lang="scss"scoped>
 @import "../../assets/styles.scss";
-
-.person-item-container {  
-  border: 1px solid black;
-  margin: 2px;
-  padding: 5px;
-}
 </style>
