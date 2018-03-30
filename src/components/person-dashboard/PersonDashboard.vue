@@ -5,7 +5,8 @@
 
       <div v-if="!loading">
 
-        <div class="persons-panel">
+        <div
+          :class="{'persons-panel-shrink': shouldTransformUI}">
           <div class="row" v-if="!persons.length">
             There are no persons yet, please add one.
           </div>
@@ -18,7 +19,7 @@
           </person-item>
         </div>
 
-        <div class="row">
+        <div class="add-person-panel row">
           <input
             class="input"
             type="text"
@@ -82,6 +83,10 @@ export default class PersonDashboard extends Vue {
   get isValid(): boolean {
     return this.name.trim() !== "";
   }
+
+  get shouldTransformUI(): boolean {
+    return this.persons.length >= 10;
+  }
 }
 </script>
 
@@ -97,5 +102,15 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.persons-panel-shrink {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-person-panel {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
