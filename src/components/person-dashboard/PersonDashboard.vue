@@ -12,6 +12,7 @@
           </div>
 
           <person-item
+            class="person-item"
             v-for="person of persons"
             :person="person"
             :key="person.id"
@@ -19,7 +20,9 @@
           </person-item>
         </div>
 
-        <div class="add-person-panel row">
+        <div
+          :class="{'add-person-panel-shrink': shouldTransformUI}" 
+          class="add-person-panel row">
           <input
             class="input"
             type="text"
@@ -45,15 +48,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { Action, Getter } from "vuex-class";
+import { Component, Vue } from 'vue-property-decorator';
+import { Action, Getter } from 'vuex-class';
 
 // Child Components
-import PersonItem from "../person-item/PersonItem.vue";
-import LoadingSpinner from "../loading-spinner/LoadingSpinner.vue";
+import PersonItem from '../person-item/PersonItem.vue';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner.vue';
 
-import { personService } from "../../services/person.service";
-import { Person } from "../../models/person.interface";
+import { personService } from '../../services/person.service';
+import { Person } from '../../models/person.interface';
 
 @Component({
   // Registering Child Components
@@ -63,13 +66,13 @@ import { Person } from "../../models/person.interface";
   }
 })
 export default class PersonDashboard extends Vue {
-  @Action("getPersons") getPersons: any;
-  @Action("addPerson") addPerson: any;
+  @Action('getPersons') getPersons: any;
+  @Action('addPerson') addPerson: any;
 
-  @Getter("getPersons") persons: Person[];
-  @Getter("getLoading") loading: boolean;
+  @Getter('getPersons') persons: Person[];
+  @Getter('getLoading') loading: boolean;
 
-  name: string = "";
+  name: string = '';
 
   created() {
     this.getPersons();
@@ -77,21 +80,21 @@ export default class PersonDashboard extends Vue {
 
   onAdd(person: Person) {
     this.addPerson(person);
-    this.name = "";
+    this.name = '';
   }
 
   get isValid(): boolean {
-    return this.name.trim() !== "";
+    return this.name.trim() !== '';
   }
 
   get shouldTransformUI(): boolean {
-    return this.persons.length >= 10;
+    return this.persons.length >= 6;
   }
 }
 </script>
 
 <style scoped>
-@import "../../assets/styles.scss";
+@import '../../assets/styles.scss';
 
 h2 {
   text-align: center;
@@ -106,7 +109,16 @@ h2 {
 
 .persons-panel-shrink {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  width: 680px;
+}
+
+.add-person-panel-shrink {
+  width: 615px;
+}
+
+.person-item {
+  flex-basis: 27%;
 }
 
 .add-person-panel {
