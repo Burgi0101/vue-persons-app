@@ -5,8 +5,8 @@
 
       <div v-if="!loading">
 
-        <div
-          :class="{'persons-panel-shrink': shouldTransformUI}">
+        <div :class="{'persons-panel-shrink': shouldTransformUI}">
+
           <div class="row" v-if="!persons.length">
             There are no persons yet, please add one.
           </div>
@@ -16,32 +16,18 @@
             v-for="person of persons"
             :person="person"
             :key="person.id"
-            @edit-person="onEdit(person)"
-            @delete-person="onDelete(person)"
+            @edit-person="onEdit($event)"
+            @delete-person="onDelete($event)"
           >
           </person-item>
+          
         </div>
 
-        <div
-          :class="{'add-person-panel-shrink': shouldTransformUI}" 
-          class="add-person-panel row">
-          <input
-            class="input"
-            type="text"
-            tabindex="1"
-            placeholder="Person Name"
-            v-model="name"
-          >
+        <person-add
+          :class="{'add-person-panel-shrink': shouldTransformUI}"
+          @add-person="onAdd($event)">
+        </person-add>
 
-          <button
-            class="btn"
-            tabindex="2"
-            :class="{ 'btn-disabled' : !isValid}"
-            :disabled="!isValid"
-            @click="onAdd({ id: null, name: name})">
-            Add Person
-          </button>
-        </div>
       </div>
 
       <loading-spinner v-if="loading"></loading-spinner>
@@ -55,15 +41,16 @@ import { Action, Getter } from "vuex-class";
 
 // Child Components
 import PersonItem from "../../components/person-item/PersonItem.vue";
+import PersonAdd from "../../components/person-add/PersonAdd.vue";
 import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner.vue";
 
-import { personService } from "../../services/person.service";
 import { Person } from "../../models/person.interface";
 
 @Component({
   // Registering Child Components
   components: {
     PersonItem,
+    PersonAdd,
     LoadingSpinner
   }
 })
@@ -76,15 +63,12 @@ export default class PersonDashboard extends Vue {
   @Getter("getPersons") persons: Person[];
   @Getter("getLoading") loading: boolean;
 
-  name: string = "";
-
   created() {
     this.getPersons();
   }
 
   onAdd(person: Person) {
     this.addPerson(person);
-    this.name = "";
   }
 
   onDelete(person: Person) {
@@ -93,10 +77,6 @@ export default class PersonDashboard extends Vue {
 
   onEdit(person: Person) {
     this.editPerson(person);
-  }
-
-  get isValid(): boolean {
-    return this.name.trim() !== "";
   }
 
   get shouldTransformUI(): boolean {
@@ -131,10 +111,5 @@ h2 {
 
 .person-item {
   flex-basis: 27%;
-}
-
-.add-person-panel {
-  display: flex;
-  justify-content: space-between;
 }
 </style>
