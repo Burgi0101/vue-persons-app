@@ -16,6 +16,8 @@
             v-for="person of persons"
             :person="person"
             :key="person.id"
+            @edit-person="onEdit(person)"
+            @delete-person="onDelete(person)"
           >
           </person-item>
         </div>
@@ -48,15 +50,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Action, Getter } from 'vuex-class';
+import { Component, Vue } from "vue-property-decorator";
+import { Action, Getter } from "vuex-class";
 
 // Child Components
-import PersonItem from '../person-item/PersonItem.vue';
-import LoadingSpinner from '../loading-spinner/LoadingSpinner.vue';
+import PersonItem from "../../components/person-item/PersonItem.vue";
+import LoadingSpinner from "../../components/loading-spinner/LoadingSpinner.vue";
 
-import { personService } from '../../services/person.service';
-import { Person } from '../../models/person.interface';
+import { personService } from "../../services/person.service";
+import { Person } from "../../models/person.interface";
 
 @Component({
   // Registering Child Components
@@ -66,13 +68,15 @@ import { Person } from '../../models/person.interface';
   }
 })
 export default class PersonDashboard extends Vue {
-  @Action('getPersons') getPersons: any;
-  @Action('addPerson') addPerson: any;
+  @Action("getPersons") getPersons: any;
+  @Action("addPerson") addPerson: any;
+  @Action("editPerson") editPerson: any;
+  @Action("deletePerson") deletePerson: any;
 
-  @Getter('getPersons') persons: Person[];
-  @Getter('getLoading') loading: boolean;
+  @Getter("getPersons") persons: Person[];
+  @Getter("getLoading") loading: boolean;
 
-  name: string = '';
+  name: string = "";
 
   created() {
     this.getPersons();
@@ -80,11 +84,19 @@ export default class PersonDashboard extends Vue {
 
   onAdd(person: Person) {
     this.addPerson(person);
-    this.name = '';
+    this.name = "";
+  }
+
+  onDelete(person: Person) {
+    this.deletePerson(person);
+  }
+
+  onEdit(person: Person) {
+    this.editPerson(person);
   }
 
   get isValid(): boolean {
-    return this.name.trim() !== '';
+    return this.name.trim() !== "";
   }
 
   get shouldTransformUI(): boolean {
@@ -94,7 +106,7 @@ export default class PersonDashboard extends Vue {
 </script>
 
 <style scoped>
-@import '../../assets/styles.scss';
+@import "../../assets/styles.scss";
 
 h2 {
   text-align: center;

@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import PersonDashboard from "./components/person-dashboard/PersonDashboard.vue";
+import PersonDashboard from "./containers/person-dashboard/PersonDashboard.vue";
 
 @Component({
   components: {

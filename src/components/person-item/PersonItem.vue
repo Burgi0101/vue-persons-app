@@ -21,7 +21,7 @@
 
         <button
             class=" btn btn-danger"
-            @click="onDelete(person)">
+            @click="$emit('delete-person', person)">
             Delete
         </button>
     </div>
@@ -29,15 +29,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Action } from "vuex-class";
 
 import { Person } from "../../models/person.interface";
 
 @Component({})
 export default class PersonItem extends Vue {
   @Prop() person: Person;
-  @Action("editPerson") editPerson: any;
-  @Action("deletePerson") deletePerson: any;
 
   name: string = this.person.name;
   editing: boolean = false;
@@ -46,14 +43,10 @@ export default class PersonItem extends Vue {
     if (this.editing) {
       if (this.hasChanged) {
         person.name = this.name;
-        this.editPerson(person);
+        this.$emit("edit-person", person);
       }
     }
     this.editing = !this.editing;
-  }
-
-  onDelete(person: Person) {
-    this.deletePerson(person);
   }
 
   get hasChanged(): boolean {
