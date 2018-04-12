@@ -5,7 +5,7 @@
 
       <div v-if="!loading">
 
-        <div :class="{'persons-panel-shrink': shouldTransformUI}">
+        <div :class="{'persons-panel-transformed': shouldTransformUI}">
 
           <div class="row" v-if="!persons.length">
             There are no persons yet, please add one.
@@ -24,7 +24,6 @@
         </div>
 
         <person-add
-          :class="{'add-person-panel-shrink': shouldTransformUI}"
           @add-person="onAdd($event)">
         </person-add>
 
@@ -97,19 +96,15 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 600px;
 }
 
-.persons-panel-shrink {
+.persons-panel-transformed {
   display: flex;
   flex-wrap: wrap;
-  width: 680px;
-}
-
-.add-person-panel-shrink {
-  width: 615px;
 }
 
 .person-item {
-  flex-basis: 27%;
+  flex-basis: 28%;
 }
 </style>
