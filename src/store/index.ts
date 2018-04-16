@@ -12,7 +12,7 @@ Vue.use(Vuex);
 export interface RootState {
     persons: Person[];
     loading: boolean;
-    errors: String[];
+    errors: string[];
 };
 
 const store: StoreOptions<RootState> = {
