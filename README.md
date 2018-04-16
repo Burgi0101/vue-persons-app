@@ -51,6 +51,7 @@ yarn build
 yarn build:dev
 yarn build:prod
 yarn start
+yarn test
 ```
 
 ## Resources
