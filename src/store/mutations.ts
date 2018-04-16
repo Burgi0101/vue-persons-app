@@ -75,7 +75,7 @@ export const mutations: MutationTree<RootState> = {
         state.loading = false;
     },
 
-    [DELETE_PERSON_FAIL](state: RootState, payload: String): void {
+    [DELETE_PERSON_FAIL](state: RootState, payload: string): void {
         state.errors = [...state.errors, payload];
         state.loading = false;
     },
@@ -93,7 +93,7 @@ export const mutations: MutationTree<RootState> = {
         state.loading = false;
     },
 
-    [EDIT_PERSON_FAIL](state: RootState, payload: String): void {
+    [EDIT_PERSON_FAIL](state: RootState, payload: string): void {
         state.errors = [...state.errors, payload];
         state.loading = false;
     }
