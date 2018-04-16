@@ -12,5 +12,9 @@ export const getters: GetterTree<RootState, RootState> = {
 
     getLoading(state: RootState): boolean {
         return state.loading;
+    },
+
+    getErrors(state: RootState): string[] {
+        return state.errors;
     }
 };
