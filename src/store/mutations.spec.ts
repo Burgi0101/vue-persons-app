@@ -8,7 +8,7 @@ import {
 import { Person } from '../models/person.interface';
 import { RootState } from '.';
 
-describe('MUTATIONS', () => {
+describe('mutations', () => {
 
     describe('GET_PERSONS_INIT', () => {
         it('should initiate get persons successfully', () => {
