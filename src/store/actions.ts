@@ -10,7 +10,14 @@ import {
     DELETE_PERSON_INIT, DELETE_PERSON_FAIL, DELETE_PERSON_SUCCESS
 } from './mutations';
 
-export const actions: ActionTree<RootState, RootState> = {
+export interface IPersonActions extends ActionTree<RootState, RootState> {
+    getPersons(context: ActionContext<RootState, RootState>): void;
+    addPerson(context: ActionContext<RootState, RootState>, payload: Person): void;
+    editPerson(context: ActionContext<RootState, RootState>, payload: Person): void;
+    deletePerson(context: ActionContext<RootState, RootState>, payload: Person): void;
+}
+
+export const actions: IPersonActions = {
 
     getPersons({ commit }: ActionContext<RootState, RootState>): void {
         commit(GET_PERSONS_INIT);

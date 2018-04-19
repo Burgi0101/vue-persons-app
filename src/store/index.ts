@@ -21,8 +21,8 @@ const store: StoreOptions<RootState> = {
         loading: false,
         errors: []
     },
-    mutations,
     actions,
+    mutations,
     getters
 };
 
