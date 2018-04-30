@@ -17,7 +17,7 @@ import PersonDashboard from "./containers/person-dashboard/PersonDashboard.vue";
 export default class AppComponent extends Vue {}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .app {
   display: flex;
   justify-content: center;

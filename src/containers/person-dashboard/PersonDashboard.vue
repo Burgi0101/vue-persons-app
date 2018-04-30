@@ -84,7 +84,7 @@ export default class PersonDashboard extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import "../../assets/styles.scss";
 
 h2 {
