@@ -1,23 +1,5 @@
-.btn {
-    background-color: #2658c1;
-    color: white;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    margin: 4px 2px;
-    padding: 5px 15px;
-    border-radius: 3px;
-}
-
-.btn-disabled {
-    background-color: #629bf7;
-    cursor: not-allowed;
-}
-
-.btn-danger {
-    background-color: #bc2d2d;
-}
+@import "./variables";
+@import "./buttons";
 
 .input {
     border: 1px solid black;
@@ -25,6 +7,11 @@
     margin: 4px 2px;
     padding: 5px 5px;
     max-width: 130px;
+    outline: none;
+
+    &:focus{
+        box-shadow: 0 0 3px $color-blue;
+    }
 }
 
 .row {

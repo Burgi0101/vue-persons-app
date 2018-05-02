@@ -1,0 +1,42 @@
+.btn {
+    background-color: $color-blue;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 4px 2px;
+    padding: 5px 15px;
+    border-radius: 3px;
+    outline: none;
+
+    &:not(:disabled){
+        cursor: pointer;
+    }
+
+    &:focus {
+        box-shadow: 0 0 3px $color-blue;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: $color-light-blue;
+    }
+
+    &:disabled {
+        opacity: $btn-disabled-opacity;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+}
+
+.btn-danger {
+    background-color: $color-red;
+
+    &:focus {
+        box-shadow: 0 0 3px $color-red;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: $color-light-red;
+    }
+}
