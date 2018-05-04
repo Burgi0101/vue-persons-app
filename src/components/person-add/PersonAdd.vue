@@ -11,7 +11,6 @@
         <button
           class="btn"
           tabindex="2"
-          :class="{ 'btn-disabled' : !isValid}"
           :disabled="!isValid"
           @click="onAdd({ id: null, name: name})">
           Add Person

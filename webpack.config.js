@@ -2,12 +2,17 @@ var path = require('path');
 var webpack = require('webpack');
 const jsonServer = require('json-server');
 const { VueLoaderPlugin } = require('vue-loader');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const ENV = process.env.npm_lifecycle_event;
+const isBuild = ENV === 'build:dev' || ENV === 'build:prod';
 
 module.exports = {
   entry: './src/app.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: isBuild ? './' : 'http://localhost:8080/',
     filename: 'build.js'
   },
   module: {
@@ -29,16 +34,26 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
+        test: /\.(png|jpe?g|gif|svg|ico)$/,
+        loader: 'file-loader?name=assets/images/[name].[ext]'
+      },
+
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/public/index.html'
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/public'
+      },
+      {
+        from: 'src/assets/images/',
+        to: 'assets/images/[path][name].[ext]'
+      }
+    ])
   ],
   resolve: {
     extensions: ['.ts', '.js', '.vue', '.json'],
