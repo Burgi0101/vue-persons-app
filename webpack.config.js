@@ -8,11 +8,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ENV = process.env.npm_lifecycle_event;
 const isBuild = ENV === 'build:dev' || ENV === 'build:prod';
 
+const PORT = '8080';
+
 module.exports = {
   entry: './src/app.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: isBuild ? './' : 'http://localhost:8080/',
+    publicPath: isBuild ? './' : `http://localhost:${PORT}/`,
     filename: 'build.js'
   },
   module: {
@@ -64,7 +66,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    port: 8080,
+    port: PORT,
     before: function (app) {
       app.use('/api', jsonServer.router('db.json'));
     },
