@@ -85,7 +85,7 @@ export default class PersonDashboard extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/styles.scss";
+@import "../../../assets/styles/styles.scss";
 
 h2 {
   text-align: center;

@@ -11,7 +11,7 @@ const isBuild = ENV === 'build:dev' || ENV === 'build:prod';
 const PORT = '8080';
 
 module.exports = {
-  entry: './src/app.ts',
+  entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: isBuild ? './' : `http://localhost:${PORT}/`,
@@ -52,8 +52,8 @@ module.exports = {
         from: 'src/public'
       },
       {
-        from: 'src/assets/images/',
-        to: 'assets/images/[path][name].[ext]'
+        from: 'src/assets/',
+        to: 'assets'
       }
     ])
   ],

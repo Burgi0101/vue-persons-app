@@ -40,7 +40,7 @@ export default class PersonAdd extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/styles.scss";
+@import "../../../assets/styles/styles.scss";
 
 .add-person-panel {
   display: flex;
